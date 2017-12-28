@@ -1,19 +1,19 @@
-#i3spotifystatus
+# i3spotifystatus
 
 ![screen](https://raw.githubusercontent.com/pradzio1/i3spotifystatus/master/res/screen.png)
 
-###About:
+### About:
 i3 status isn't particularly the best status generator for i3bar in terms of customization. But it's my favourite, because it works, it's easy to use, and it's bundled with i3wm so I don't have to think about installing it. Feature that lack I've been missing the most that wasn't built into i3status was notifying about author and title of currently played song in spotify client. I have found some gists written by [@csssuf](https://github.com/csssuf), and they work well, but due to format of data outputed by i3status all of the information about colors of text was lost and i3bar was showing only monochromatic text.
 
 i3spotifystatus is a tiny python (with even smaller bash script because I was too lazy) script that parses JSON outputed by i3status, adds information about song author and title and outputs it to i3bar.
 
-###What you'll need:
+### What you'll need:
 * DBus
 * [@csssuf](https://github.com/csssuf)'s awk script, you can find it [here](https://gist.github.com/csssuf/13213f23191b92a7ce77#file-spotify_song-awk)
 * Spotify client (obviously)
 * You'll need FontAwesome if you want to display spotify logo on the bar.
 
-###How to install:
+### How to install:
 
 * clone repository to your prefered location
 * clone [@csssuf](https://github.com/csssuf)'s awk script to folder containing both `pystatus.py` and `getinfo.sh`
@@ -21,7 +21,7 @@ i3spotifystatus is a tiny python (with even smaller bash script because I was to
 * in `i3status.conf` file (create one if you don't have any -> read i3status doc for more information) set `output_format = "i3bar"`
 * Mod + Shift + R to reload i3 configs.
 
-###Credits:
+### Credits:
 Script is based on sample wrapper commited on original i3status repository.
 
 Also:
