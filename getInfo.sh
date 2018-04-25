@@ -7,5 +7,5 @@ elif [ "$1" = artist ]; then
 elif [ "$1" = song ]; then
   dbus-send --print-reply --session --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.freedesktop.DBus.Properties.Get string:'org.mpris.MediaPlayer2.Player' string:'Metadata' | awk -f ${dir}/spotify_song.awk | tail -n 1 | cut -d':' -f2
 else
-  echo "Niewlasciwy arg"
+  echo "No argument specified to the script who gets info from Spotify. Try using 'status', 'artist' or 'song'."
 fi
