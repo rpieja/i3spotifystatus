@@ -1,4 +1,4 @@
-/string *"xesam:artist/
+/string  *"xesam:artist/{
     while (1) {
         getline line
         if (line ~ /string "/) {
@@ -20,4 +20,3 @@
         }
     }
 }
-
