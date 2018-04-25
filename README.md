@@ -44,6 +44,5 @@ Tip: If you are not sure how this whole thing works, you can comment your config
 ### Credits:
 Script is based on sample wrapper commited on original i3status repository.
 
-Also:
+Awk script by @csssuf.
 
-[@csssuf](https://github.com/csssuf) - awk script that returns song data to my script
