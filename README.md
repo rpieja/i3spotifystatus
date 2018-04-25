@@ -17,13 +17,32 @@ i3spotifystatus is a tiny python (with even smaller bash script because I was to
 
 * clone repository to your prefered location
 * clone [@csssuf](https://github.com/csssuf)'s awk script to folder containing both `pystatus.py` and `getinfo.sh`
-* in your i3 config file (usually placed in ~/.config/i3/) set `status_command` to `i3status | /path/to/your/pystatus.py` in `bar` section
-* in `i3status.conf` file (create one if you don't have any -> read i3status doc for more information) set `output_format = "i3bar"`
-* Mod + Shift + R to reload i3 configs.
+* in your i3 config file (usually placed in ~/.config/i3/) set `status_command` to `i3status | /path/to/your/pystatus.py` in `bar` section, like this:
+
+```
+bar {
+    status_command i3status | ~/Documents/GitHub/i3spotifystatus/pystatus.py
+}
+```
+
+If you are using i3-gaps, it will probably contain the `status_command i3status` already. You just have to add the pipe and the python script path after. 
+
+* in `i3status.conf` file (create one if you don't have any -> read i3status doc for more information) set `output_format = "i3bar"` inside the 'general' configuration, like this:
+
+```
+general {
+    ...
+    output_format = "i3bar"
+    ...
+}
+```
+
+* Reload i3 configs (usually `Mod + Shift + R`, if you haven't changed it).
+
+Tip: If you are not sure how this whole thing works, you can comment your config files using `#` at the beginning of each line. This way it is easy to revert the changes.
 
 ### Credits:
 Script is based on sample wrapper commited on original i3status repository.
 
-Also:
+Awk script by @csssuf.
 
-[@csssuf](https://github.com/csssuf) - awk script that returns song data to my script
