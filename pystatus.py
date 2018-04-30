@@ -6,6 +6,10 @@ import json
 import subprocess
 import os
 
+if sys.version_info[0] == 2:
+    reload(sys)
+    sys.setdefaultencoding('utf8')
+
 dir_path=os.path.dirname(os.path.realpath(__file__))
 
 
