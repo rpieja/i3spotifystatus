@@ -1,6 +1,6 @@
 # i3spotifystatus
 
-![screen](https://raw.githubusercontent.com/pradzio1/i3spotifystatus/master/res/screen.png)
+![screen](https://raw.githubusercontent.com/pradzio1/i3spotifystatus/master/res/scr.png)
 
 ### About:
 i3 status isn't particularly the best status generator for i3bar in terms of customization. But it's my favourite, because it works, it's easy to use, and it's bundled with i3wm so I don't have to think about installing it. Feature that lack I've been missing the most that wasn't built into i3status was notifying about author and title of currently played song in spotify client. I have found some gists written by [@csssuf](https://github.com/csssuf), and they work well, but due to format of data outputed by i3status all of the information about colors of text was lost and i3bar was showing only monochromatic text.
