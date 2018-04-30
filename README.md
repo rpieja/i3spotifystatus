@@ -16,7 +16,6 @@ i3spotifystatus is a tiny python (with even smaller bash script because I was to
 ### How to install:
 
 * clone repository to your prefered location
-* clone [@csssuf](https://github.com/csssuf)'s awk script to folder containing both `pystatus.py` and `getinfo.sh`
 * in your i3 config file (usually placed in ~/.config/i3/) set `status_command` to `i3status | /path/to/your/pystatus.py` in `bar` section, like this:
 
 ```
