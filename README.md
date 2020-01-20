@@ -9,7 +9,6 @@ i3spotifystatus is a tiny python (with even smaller bash script because I was to
 
 ### What you'll need:
 * DBus
-* [@csssuf](https://github.com/csssuf)'s awk script, you can find it [here](https://gist.github.com/csssuf/13213f23191b92a7ce77#file-spotify_song-awk)
 * Spotify client (obviously)
 * You'll need FontAwesome if you want to display spotify logo on the bar.
 
@@ -43,5 +42,5 @@ Tip: If you are not sure how this whole thing works, you can comment your config
 ### Credits:
 Script is based on sample wrapper commited on original i3status repository.
 
-Awk script by @csssuf.
+Awk scripts based on [@csssuf](https://github.com/csssuf)'s awk script, you can find it [here](https://gist.github.com/csssuf/13213f23191b92a7ce77#file-spotify_song-awk).
 
