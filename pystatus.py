@@ -17,19 +17,21 @@ def get_status():
     spotify_read = subprocess.check_output("%s/getInfo.sh status" % dir_path, shell=True)
     spotify_status=spotify_read.decode('utf-8')
     return spotify_status
-    #sys.stdout.write(spotify_status)
 
 def get_artist():
     spotify_read = subprocess.check_output("%s/getInfo.sh artist" % dir_path, shell=True)
     spotify_artist=spotify_read.decode('utf-8')
     return spotify_artist[:-1]
-    #sys.stdout.write(spotify_artist)
 
 def get_song():
     spotify_read = subprocess.check_output("%s/getInfo.sh song" % dir_path, shell=True)
     spotify_song=spotify_read.decode('utf-8')
     return spotify_song[:-1]
-    #sys.stdout.write(spotify_song)
+
+def get_album():
+    spotify_read = subprocess.check_output("%s/getInfo.sh album" % dir_path, shell=True)
+    spotify_album=spotify_read.decode('utf-8')
+    return spotify_album[:-1].split("\n")[0] # just the album name, not the album name \n artist name
 
 
 def read_line():
@@ -73,7 +75,7 @@ if __name__ == '__main__':
             j = json.loads(line)
             # insert information into the start of the json, but could be anywhere
             # CHANGE THIS LINE TO INSERT SOMETHING ELSE
-            j.insert(0, {'color' : '#9ec600', 'full_text' : ' %s - %s' % (get_artist(), get_song()) , 'name' : 'spotify'})
+            j.insert(0, {'color' : '#9ec600', 'full_text' : ' %s - %s [%s]' % (get_artist(), get_song(), get_album()) , 'name' : 'spotify'})
             # and echo back new encoded json
             print_line(prefix+json.dumps(j))
         else:
