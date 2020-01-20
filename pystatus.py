@@ -17,13 +17,11 @@ def get_status():
     spotify_read = subprocess.check_output("%s/getInfo.sh status" % dir_path, shell=True)
     spotify_status=spotify_read.decode('utf-8')
     return spotify_status
-    #sys.stdout.write(spotify_status)
 
 def get_artist():
     spotify_read = subprocess.check_output("%s/getInfo.sh artist" % dir_path, shell=True)
     spotify_artist=spotify_read.decode('utf-8')
     return spotify_artist[:-1]
-    #sys.stdout.write(spotify_artist)
 
 def get_song():
     spotify_read = subprocess.check_output("%s/getInfo.sh song" % dir_path, shell=True)
@@ -34,7 +32,6 @@ def get_album():
     spotify_read = subprocess.check_output("%s/getInfo.sh album" % dir_path, shell=True)
     spotify_album=spotify_read.decode('utf-8')
     return spotify_album[:-1].split("\n")[0] # just the album name, not the album name \n artist name
-    #sys.stdout.write(spotify_song)
 
 
 def read_line():
