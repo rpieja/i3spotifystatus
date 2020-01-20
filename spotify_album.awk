@@ -1,8 +1,8 @@
-/string  *"xesam:title/{
+/string  *"xesam:album/{
     while(1) {
         getline line
         if (line ~ /string "/) {
-            sub(/.*string "/, "title:", line)
+            sub(/.*string "/, "album:", line)
             sub(/".*$/, "", line)
             print line
             break
