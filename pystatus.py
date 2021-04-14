@@ -1,36 +1,39 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-import sys
+import dbus
 import json
-import subprocess
 import os
+import subprocess
+import sys
 
 if sys.version_info[0] == 2:
-    reload(sys)
-    sys.setdefaultencoding('utf8')
+    sys.stderr.write('please use python3\n')
+    sys.exit(1)
 
 dir_path=os.path.dirname(os.path.realpath(__file__))
 
+#Get from the bus
+bus = dbus.SessionBus()
+# EDIT ME IF YOU USE A DIFFERENT SPOTIFY CLIENT
+spotify_client = 'spotifyd'
+player = 'org.mpris.MediaPlayer2.Player'
+proxy = bus.get_object(f'org.mpris.MediaPlayer2.{spotify_client}','/org/mpris/MediaPlayer2')
+interface = dbus.Interface(proxy, dbus_interface='org.freedesktop.DBus.Properties')
 
 def get_status():
-    spotify_read = subprocess.check_output("%s/getInfo.sh status" % dir_path, shell=True)
-    spotify_status=spotify_read.decode('utf-8')
-    return spotify_status
-    #sys.stdout.write(spotify_status)
+    status = interface.GetAll(player)
+    playback = str(status['PlaybackStatus'])
+    return playback
+    #sys.stdout.write(playback)
 
-def get_artist():
-    spotify_read = subprocess.check_output("%s/getInfo.sh artist" % dir_path, shell=True)
-    spotify_artist=spotify_read.decode('utf-8')
-    return spotify_artist[:-1]
-    #sys.stdout.write(spotify_artist)
-
-def get_song():
-    spotify_read = subprocess.check_output("%s/getInfo.sh song" % dir_path, shell=True)
-    spotify_song=spotify_read.decode('utf-8')
-    return spotify_song[:-1]
-    #sys.stdout.write(spotify_song)
-
+def get_playing():
+    status = interface.GetAll(player)
+    meta = status['Metadata']
+    artist = str(meta['xesam:artist'][0])
+    song = str(meta['xesam:title'])
+    return artist, song
+    #sys.stdout.write(artist, song)
 
 def read_line():
     """ Interrupted respecting reader for stdin. """
@@ -50,12 +53,6 @@ def print_line(message):
     sys.stdout.write(message + '\n')
     sys.stdout.flush()
 
-def get_governor():
-    with open('/sys/devices/platform/i5k_amb.0/temp4_input') as fp:
-        return fp.readlines()[0].strip()
-
-
-
 if __name__ == '__main__':
     # Skip the first line which contains the version header.
     print_line(read_line())
@@ -64,16 +61,16 @@ if __name__ == '__main__':
     print_line(read_line())
 
     while True:
-
         line, prefix = read_line(), ''
         # ignore comma at start of lines
         if line.startswith(','):
             line, prefix = line[1:], ','
-        if get_status() in ['Playing\n']:
+        if get_status() in ['Playing']:
             j = json.loads(line)
             # insert information into the start of the json, but could be anywhere
             # CHANGE THIS LINE TO INSERT SOMETHING ELSE
-            j.insert(0, {'color' : '#9ec600', 'full_text' : ' %s - %s' % (get_artist(), get_song()) , 'name' : 'spotify'})
+            artist, song = get_playing()
+            j.insert(0, {'color' : '#9ec600', 'full_text' : f' {artist} - {song}', 'name' : 'spotify'})
             # and echo back new encoded json
             print_line(prefix+json.dumps(j))
         else:
