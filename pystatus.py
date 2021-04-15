@@ -74,23 +74,23 @@ def update_rate(interface=None):
         tmp_tx = int(open(f'/sys/class/net/{iface}/statistics/tx_bytes','r').read())
         rx+=tmp_rx
         tx+=tmp_tx
-        
+
     try:
         interval = current_time - last_time
     except NameError:
         interval = 0
-        
+
     if interval > 0:
         rate_rx = (rx - last_rx) / interval
         rate_tx = (tx - last_tx) / interval
         rate = f' {sizeof_fmt(rate_rx)}↓ {sizeof_fmt(rate_tx)}↑'
     else:
         rate = ''
-        
+
     last_time = current_time
     last_rx = rx
     last_tx = tx
-    
+
     return rate
 
 
@@ -136,15 +136,15 @@ if __name__ == '__main__':
                 status['full_text'] = f'{j[0]["full_text"]}{update_rate(iface)}'
         
         # check if dbus object is available
-        if not connect_dbus():
-            print_line(prefix+json.dumps(j))
-        if get_status() in ['Playing']:
-            # insert information into the start of the json, but could be anywhere
-            # CHANGE THIS LINE TO INSERT SOMETHING ELSE
-            artist, song = get_playing()
-            j.insert(0, {'color' : '#9ec600', 'full_text' : f' {artist} - {song}', 'name' : 'spotify', 'markup': 'none'})
-            # and echo back new encoded json
-            print_line(prefix+json.dumps(j))
-        else:
-            j.insert(0, {'color' : '#9ec600', 'full_text' : f' {get_status()}', 'name' : 'spotify', 'markup': 'none'})
-            print_line(prefix+json.dumps(j))
+        if connect_dbus():
+            if get_status() in ['Playing']:
+                # insert information into the start of the json, but could be anywhere
+                # CHANGE THIS LINE TO INSERT SOMETHING ELSE
+                artist, song = get_playing()
+                j.insert(0, {'color' : '#9ec600', 'full_text' : f' {artist} - {song}', 'name' : 'spotify', 'markup': 'none'})
+                # and echo back new encoded json
+            else:
+                j.insert(0, {'color' : '#9ec600', 'full_text' : f' {get_status()}', 'name' : 'spotify', 'markup': 'none'})
+
+        print_line(prefix+json.dumps(j))
+
