@@ -17,7 +17,6 @@ if sys.version_info[0] == 2:
 
 dir_path=os.path.dirname(os.path.realpath(__file__))
 
-
 # Spotify Song Status
 # EDIT ME IF YOU USE A DIFFERENT SPOTIFY CLIENT
 spotify_client = 'spotifyd'
@@ -145,4 +144,7 @@ if __name__ == '__main__':
             artist, song = get_playing()
             j.insert(0, {'color' : '#9ec600', 'full_text' : f' {artist} - {song}', 'name' : 'spotify', 'markup': 'none'})
             # and echo back new encoded json
+            print_line(prefix+json.dumps(j))
+        else:
+            j.insert(0, {'color' : '#9ec600', 'full_text' : f' {get_status()}', 'name' : 'spotify', 'markup': 'none'})
             print_line(prefix+json.dumps(j))
