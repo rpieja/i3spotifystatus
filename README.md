@@ -7,15 +7,19 @@ i3 status isn't particularly the best status generator for i3bar in terms of cus
 
 i3spotifystatus is a tiny python (with even smaller bash script because I was too lazy) script that parses JSON outputed by i3status, adds information about song author and title and outputs it to i3bar.
 
+[@mkoreneff](https://github.com/mkoreneff) This update uses python to access dbus, which means all the lifting is done in python and there is no longer a requirement for the awk or shell script.
+
 ### What you'll need:
 * DBus
-* [@csssuf](https://github.com/csssuf)'s awk script, you can find it [here](https://gist.github.com/csssuf/13213f23191b92a7ce77#file-spotify_song-awk)
+* ~~[@csssuf](https://github.com/csssuf)'s awk script, you can find it [here](https://gist.github.com/csssuf/13213f23191b92a7ce77#file-spotify_song-awk)~~
 * Spotify client (obviously)
 * You'll need FontAwesome if you want to display spotify logo on the bar.
+* python3
 
 ### How to install:
 
 * clone repository to your prefered location
+* edit line 22 of `pystatus.py` and update `spotify_client` to your preferred splotify client
 * in your i3 config file (usually placed in ~/.config/i3/) set `status_command` to `i3status | /path/to/your/pystatus.py` in `bar` section, like this:
 
 ```
@@ -45,3 +49,5 @@ Script is based on sample wrapper commited on original i3status repository.
 
 Awk script by @csssuf.
 
+DBus python updates by [@mkoreneff](https://github.com/mkoreneff)  
+Inspiration for the python solution comes from [kenogo/spotify-lyrics-cli](https://github.com/kenogo/spotify-lyrics-cli)
